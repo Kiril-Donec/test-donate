@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const priceElement = card.querySelector('.case-price .amount');
             if (priceElement) {
                 const rubPrice = card.dataset.price + '₽';
-                const uahPrice = (parseFloat(card.dataset.price) * 0.48).toFixed(1) + '₴';
+                const uahPrice = '16.5₴';
                 priceElement.textContent = currentCurrency === 'RUB' ? rubPrice : uahPrice;
             }
         });

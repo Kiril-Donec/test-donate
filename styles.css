@@ -88,13 +88,55 @@ h1 {
     }
 }
 
+.cosmos-card .donation-title {
+    background: linear-gradient(90deg, #00BFFF, #9370DB, #FF69B4, #00BFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    position: relative;
+    animation: cosmosGradient 6s ease-in-out infinite;
+    background-size: 300% auto;
+}
+
+@keyframes cosmosGradient {
+    0% { background-position: 0% center; }
+    50% { background-position: 150% center; }
+    100% { background-position: 300% center; }
+}
+
+.cosmos-card::after {
+    content: '-50%';
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background: linear-gradient(45deg, #FF69B4, #9370DB);
+    color: white;
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-size: 0.9em;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(147, 112, 219, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    animation: glowDiscount 2s infinite;
+}
+
+@keyframes glowDiscount {
+    0%, 100% {
+        box-shadow: 0 2px 10px rgba(147, 112, 219, 0.3);
+    }
+    50% {
+        box-shadow: 0 2px 20px rgba(255, 105, 180, 0.5);
+    }
+}
+
 .donation-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 .cosmos-card:hover {
-    box-shadow: 0 15px 30px rgba(100, 100, 255, 0.2);
+    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
 }
 
 .donation-title {
@@ -169,7 +211,6 @@ h1 {
     background: linear-gradient(45deg, #FF69B4, #9370DB);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: none;
     position: relative;
 }
 
@@ -531,7 +572,7 @@ h1 {
 }
 
 .feature-section.perks h3::before {
-    content: '★';
+    content: "🌟";
 }
 
 .cmd {
@@ -582,32 +623,56 @@ h1 {
 }
 
 .perk-value {
-    font-size: 1.2em;
+    display: inline-block;
+    background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: bold;
-    color: #FFD700;
-    margin-right: 5px;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+    padding: 0 5px;
+    transform: scale(1);
+    transition: all 0.3s ease;
 }
 
-.cosmos-card .perk-value {
-    color: #9370DB;
-    text-shadow: 0 0 5px rgba(147, 112, 219, 0.3);
+.feature-section.perks li:hover .perk-value {
+    transform: scale(1.1);
+    filter: brightness(1.2);
 }
 
-.phoenix-card .perk-value {
-    color: #FF4500;
-    text-shadow: 0 0 5px rgba(255, 69, 0, 0.3);
+.feature-section.perks li:hover::before {
+    transform: scale(1.2) rotate(15deg);
+    opacity: 1;
 }
 
-.phoenix-card .buy-button {
-    background: linear-gradient(90deg, #FF4500, #FF8C00);
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+.feature-section.perks h3::before {
+    content: "🌟";
+    margin-right: 10px;
+    font-size: 1.2em;
 }
 
-.phoenix-card .buy-button:hover {
-    background: linear-gradient(90deg, #FF8C00, #FF4500);
-    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+.feature-section.perks ul:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cosmos-card .feature-section.perks ul {
+    border-color: rgba(0, 191, 255, 0.2);
+}
+
+.phoenix-card .feature-section.perks ul {
+    border-color: rgba(255, 69, 0, 0.2);
+}
+
+.galaxy-card .feature-section.perks ul {
+    border-color: rgba(138, 43, 226, 0.2);
+}
+
+.paladin-card .feature-section.perks ul {
+    border-color: rgba(0, 255, 255, 0.2);
+}
+
+.hrust-card .feature-section.perks ul {
+    border-color: rgba(255, 215, 0, 0.2);
 }
 
 /* Стили для вкладок */
@@ -1509,4 +1574,306 @@ h1 {
 
 .galaxy-card:hover {
     box-shadow: 0 15px 30px rgba(255, 105, 180, 0.2);
-} 
+}
+
+#cases {
+    position: relative;
+}
+
+#cases .cases-container {
+    pointer-events: none;
+}
+
+#cases::before {
+    content: 'ВРЕМЕННО НЕДОСТУПНО';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFD700;
+    font-size: 2.5em;
+    font-family: 'Minecraft', sans-serif;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    letter-spacing: 2px;
+    pointer-events: all;
+}
+
+/* Стили для HRUST */
+.hrust-card {
+    background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+    border: 1px solid #ffd700;
+    position: relative;
+    overflow: hidden;
+}
+
+.hrust-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 215, 0, 0.15),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: hrustShine 4s infinite;
+}
+
+@keyframes hrustShine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 215, 0, 0.15),
+            transparent
+        );
+    }
+    50% {
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 215, 0, 0.3),
+            transparent
+        );
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 215, 0, 0.15),
+            transparent
+        );
+    }
+}
+
+.hrust-card .donation-title {
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    animation: hrustText 2s infinite;
+}
+
+@keyframes hrustText {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+}
+
+.hrust-card .donation-price {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.hrust-card .donation-price .amount {
+    background: linear-gradient(45deg, #ffd700, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+.hrust-card .donation-price .amount::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(45deg, #ffd700, #ffa500);
+    filter: blur(10px);
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.hrust-card .cmd {
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+}
+
+.hrust-card .perk-value {
+    color: #ffd700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.hrust-card .buy-button {
+    background: linear-gradient(90deg, #ffd700, #ffa500);
+    color: #1a1a1a;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.hrust-card .buy-button:hover {
+    background: linear-gradient(90deg, #ffa500, #ffd700);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.hrust-card .donation-features .cmd + span {
+    background: linear-gradient(90deg, #ffd700, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hrust-card .donation-features li:hover .cmd {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.hrust-card:hover {
+    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+}
+
+.cosmos-card .limited-offer {
+    color: #FF69B4;
+    font-weight: bold;
+    position: relative;
+    padding-left: 25px;
+    margin-top: 10px;
+    animation: pulseOffer 1.5s infinite;
+}
+
+@keyframes pulseOffer {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.cosmos-card .limited-offer::before {
+    content: '⚡';
+    position: absolute;
+    left: 0;
+    animation: shakeIcon 2s infinite;
+}
+
+@keyframes shakeIcon {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(15deg);
+    }
+    75% {
+        transform: rotate(-15deg);
+    }
+}
+
+.feature-section.perks ul {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin-top: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.feature-section.perks li {
+    position: relative;
+    padding: 8px 12px 8px 30px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-section.perks li:last-child {
+    border-bottom: none;
+}
+
+.feature-section.perks li::before {
+    content: "✨";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+.cosmos-card .feature-section.perks li {
+    border-bottom-color: rgba(0, 191, 255, 0.1);
+}
+
+.phoenix-card .feature-section.perks li {
+    border-bottom-color: rgba(255, 69, 0, 0.1);
+}
+
+.galaxy-card .feature-section.perks li {
+    border-bottom-color: rgba(138, 43, 226, 0.1);
+}
+
+.paladin-card .feature-section.perks li {
+    border-bottom-color: rgba(0, 255, 255, 0.1);
+}
+
+.hrust-card .feature-section.perks li {
+    border-bottom-color: rgba(255, 215, 0, 0.1);
+}
+
+.feature-section.perks li:hover {
+    background: rgba(255, 255, 255, 0.03);
+    transform: translateX(5px);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.cosmos-card .feature-section.perks li:hover {
+    background: linear-gradient(135deg, rgba(0, 191, 255, 0.03), rgba(147, 112, 219, 0.03));
+    border-bottom-color: rgba(0, 191, 255, 0.2);
+}
+
+.phoenix-card .feature-section.perks li:hover {
+    background: linear-gradient(135deg, rgba(255, 69, 0, 0.03), rgba(255, 140, 0, 0.03));
+    border-bottom-color: rgba(255, 69, 0, 0.2);
+}
+
+.galaxy-card .feature-section.perks li:hover {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.03), rgba(75, 0, 130, 0.03));
+    border-bottom-color: rgba(138, 43, 226, 0.2);
+}
+
+.paladin-card .feature-section.perks li:hover {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.03), rgba(64, 224, 208, 0.03));
+    border-bottom-color: rgba(0, 255, 255, 0.2);
+}
+
+.hrust-card .feature-section.perks li:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.03), rgba(255, 165, 0, 0.03));
+    border-bottom-color: rgba(255, 215, 0, 0.2);
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+    50% { transform: scale(1.2) rotate(15deg); opacity: 1; }
+}
+
+.feature-section.perks li::before {
+    animation: sparkle 2s infinite;
+    animation-delay: calc(var(--li-index, 0) * 0.2s);
+}
+
+.feature-section.perks li {
+    --li-index: 0;
+}
+
+.feature-section.perks li:nth-child(1) { --li-index: 1; }
+.feature-section.perks li:nth-child(2) { --li-index: 2; }
+.feature-section.perks li:nth-child(3) { --li-index: 3; }
+.feature-section.perks li:nth-child(4) { --li-index: 4; }
+.feature-section.perks li:nth-child(5) { --li-index: 5; }
+.feature-section.perks li:nth-child(6) { --li-index: 6; } 
