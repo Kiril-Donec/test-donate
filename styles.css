@@ -117,9 +117,7 @@ h1 {
     border-radius: 8px;
     position: relative;
     background: rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    height: 50px;
 }
 
 .donation-price::before {
@@ -134,10 +132,24 @@ h1 {
     letter-spacing: 2px;
 }
 
-.donation-price .amount {
+.amount {
     color: #FFD700;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     font-weight: bold;
+}
+
+.rub-price, .uah-price {
+    transition: all 0.3s ease;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.rub-price.active, .uah-price.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .donation-price .currency {
@@ -687,14 +699,15 @@ h1 {
 }
 
 .case-card {
-    background: linear-gradient(145deg, #2a2a2a, #333);
-    border-radius: 15px;
-    padding: 25px;
-    width: 300px;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #1a1a2e, #2a2a4a);
+    border-radius: 20px;
+    padding: 30px;
+    width: 350px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .case-card::before {
@@ -707,356 +720,253 @@ h1 {
     background: linear-gradient(
         45deg,
         transparent,
-        rgba(255, 215, 0, 0.1),
+        rgba(255, 215, 0, 0.15),
         transparent
     );
     transform: rotate(45deg);
-    animation: caseShine 3s infinite;
+    animation: caseShine 6s infinite;
 }
 
 @keyframes caseShine {
     0% {
         transform: translateX(-100%) rotate(45deg);
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 215, 0, 0.15),
+            transparent
+        );
+    }
+    50% {
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 165, 0, 0.2),
+            transparent
+        );
     }
     100% {
         transform: translateX(100%) rotate(45deg);
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 215, 0, 0.15),
+            transparent
+        );
     }
 }
 
 .case-title {
-    font-size: 1.8em;
+    font-size: 2.2em;
     color: #FFD700;
     text-align: center;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    position: relative;
+}
+
+.case-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
 }
 
 .case-image {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 30px;
     position: relative;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
 .case-image img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
-    animation: floatCase 3s ease-in-out infinite;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.5s ease;
+    filter: brightness(1.1) contrast(1.1) saturate(1.2);
 }
 
-@keyframes floatCase {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+.case-card:hover .case-image img {
+    transform: scale(1.1) rotate(2deg);
 }
 
 .case-price {
-    font-size: 1.8em;
+    font-size: 2.2em;
     text-align: center;
-    margin: 20px 0;
-    padding: 10px;
-    border-radius: 8px;
-    background: rgba(0, 0, 0, 0.2);
+    margin: 25px 0;
+    padding: 15px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2));
     color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    position: relative;
+    height: 80px;
+}
+
+.case-price .amount {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.case-price .amount.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .case-content {
     background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 15px;
-    margin: 20px 0;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 25px 0;
+    border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .case-content h3 {
     color: #FFD700;
-    margin-bottom: 10px;
-    font-size: 1.2em;
+    margin-bottom: 20px;
+    font-size: 1.4em;
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
-.case-content h3::before {
-    content: '📦';
-    margin-right: 8px;
+.case-content h3::before,
+.case-content h3::after {
+    content: '🎁';
+    margin: 0 10px;
+    font-size: 0.9em;
 }
 
 .case-content ul {
     list-style: none;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .case-content li {
-    margin-bottom: 12px;
-    padding: 8px 15px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
+    margin-bottom: 15px;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
     transition: all 0.3s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.case-content li:hover {
-    transform: translateX(5px);
-    background: rgba(255, 215, 0, 0.1);
+.case-content li .chance {
+    font-size: 0.9em;
+    opacity: 0.8;
+    font-family: monospace;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
 }
 
-.case-content li:nth-child(1) { color: #FFD700; } /* STAR */
-.case-content li:nth-child(2) { color: #9370DB; } /* COSMOS */
-.case-content li:nth-child(3) { color: #FF4500; } /* PHOENIX */
-.case-content li:nth-child(4) { color: #00BFFF; } /* GALAXY */
-.case-content li:nth-child(5) { color: #FF1493; } /* LORD */
-.case-content li:nth-child(6) { color: #FFD700; text-shadow: 0 0 10px #FFD700; } /* JACKPOT */
+.case-content li .privilege {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.case-content li .privilege span {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.case-content li:nth-child(1) .privilege .name { 
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.case-content li:nth-child(2) .privilege .name { 
+    background: linear-gradient(90deg, #9370DB, #00BFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.case-content li:nth-child(3) .privilege .name { 
+    background: linear-gradient(90deg, #FF4500, #FF8C00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.case-content li:nth-child(4) .privilege .name { 
+    background: linear-gradient(90deg, #ff00ff, #ff69b4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.case-content li:nth-child(5) .privilege .name { 
+    background: linear-gradient(90deg, #40e0d0, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.case-content li:nth-child(6) .privilege .name { 
+    background: linear-gradient(90deg, #ffd700, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: jackpotGlow 2s infinite;
+}
+
+@keyframes jackpotGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+    }
+}
 
 .case-description {
-    background: rgba(255, 215, 0, 0.05);
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 20px;
-    border-left: 3px solid #FFD700;
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.05), rgba(255, 165, 0, 0.1));
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 25px;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.case-description::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #FFD700, transparent);
 }
 
 .case-description p {
-    color: #AAA;
-    line-height: 1.5;
-    font-size: 0.9em;
-}
-
-.rare-case {
-    background: linear-gradient(145deg, #2D1A4A, #4A2D6D);
-    border: 1px solid #6A3D9A;
-}
-
-.rare-case .case-title {
-    color: #9370DB;
-    text-shadow: 0 0 10px rgba(147, 112, 219, 0.3);
-}
-
-.rare-case::before {
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(147, 112, 219, 0.1),
-        transparent
-    );
-}
-
-.rare-case .case-price {
-    color: #9370DB;
-}
-
-.rare-case .case-content h3,
-.rare-case .case-content li::before {
-    color: #9370DB;
-}
-
-.rare-case img {
-    filter: drop-shadow(0 0 10px rgba(147, 112, 219, 0.3));
+    color: #DDD;
+    line-height: 1.6;
+    font-size: 1em;
 }
 
 .case-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-}
-
-.rare-case:hover {
-    box-shadow: 0 15px 30px rgba(147, 112, 219, 0.2);
-}
-
-/* Стили для Galaxy */
-.galaxy-card {
-    background: linear-gradient(145deg, #1a0033, #330066);
-    border: 1px solid #6600cc;
-    position: relative;
-    overflow: hidden;
-}
-
-.galaxy-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(147, 0, 255, 0.1),
-        transparent
-    );
-    transform: rotate(45deg);
-    animation: galaxyShine 4s infinite;
-}
-
-@keyframes galaxyShine {
-    0% {
-        transform: translateX(-100%) rotate(45deg);
-        background: linear-gradient(
-            45deg,
-            transparent,
-            rgba(147, 0, 255, 0.1),
-            transparent
-        );
-    }
-    50% {
-        background: linear-gradient(
-            45deg,
-            transparent,
-            rgba(255, 0, 255, 0.2),
-            transparent
-        );
-    }
-    100% {
-        transform: translateX(100%) rotate(45deg);
-        background: linear-gradient(
-            45deg,
-            transparent,
-            rgba(147, 0, 255, 0.1),
-            transparent
-        );
-    }
-}
-
-.galaxy-card .donation-title {
-    color: #ff00ff;
-    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-    animation: galaxyText 2s infinite;
-}
-
-@keyframes galaxyText {
-    0%, 100% {
-        text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-    }
-    50% {
-        text-shadow: 0 0 20px rgba(147, 0, 255, 0.8);
-    }
-}
-
-.galaxy-card .donation-price {
-    background: rgba(102, 0, 204, 0.2);
-    border: 1px solid rgba(255, 0, 255, 0.2);
-}
-
-.galaxy-card .donation-price .amount {
-    background: linear-gradient(45deg, #ff00ff, #9900ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    position: relative;
-}
-
-.galaxy-card .donation-price .amount::after {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    background: linear-gradient(45deg, #ff00ff, #9900ff);
-    filter: blur(10px);
-    opacity: 0.3;
-    z-index: -1;
-}
-
-.galaxy-card .cmd {
-    background: rgba(255, 0, 255, 0.1);
-    color: #ff00ff;
-}
-
-.galaxy-card .perk-value {
-    color: #ff00ff;
-    text-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
-}
-
-.galaxy-card .buy-button {
-    background: linear-gradient(90deg, #9900ff, #ff00ff);
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.galaxy-card .buy-button:hover {
-    background: linear-gradient(90deg, #ff00ff, #9900ff);
-    box-shadow: 0 5px 15px rgba(255, 0, 255, 0.3);
-}
-
-/* Обновленные стили для привилегий в донат кейсе */
-.case-content ul li {
-    font-family: 'Minecraft', sans-serif;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.case-content ul li:nth-child(1) {
-    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.2));
-    color: #FFD700;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-}
-
-.case-content ul li:nth-child(2) {
-    background: linear-gradient(90deg, rgba(147, 112, 219, 0.1), rgba(147, 112, 219, 0.2));
-    color: #9370DB;
-    text-shadow: 0 0 5px rgba(147, 112, 219, 0.5);
-}
-
-.case-content ul li:nth-child(3) {
-    background: linear-gradient(90deg, rgba(255, 69, 0, 0.1), rgba(255, 69, 0, 0.2));
-    color: #FF4500;
-    text-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
-}
-
-.case-content ul li:nth-child(4) {
-    background: linear-gradient(90deg, rgba(255, 0, 255, 0.1), rgba(147, 0, 255, 0.2));
-    color: #ff00ff;
-    text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-}
-
-.case-content ul li:nth-child(5) {
-    background: linear-gradient(90deg, rgba(255, 20, 147, 0.1), rgba(255, 20, 147, 0.2));
-    color: #FF1493;
-    text-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
-}
-
-.case-content ul li:nth-child(6) {
-    background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.3));
-    color: #FFD700;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-    animation: jackpotPulse 2s infinite;
-}
-
-@keyframes jackpotPulse {
-    0%, 100% {
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-        background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.3));
-    }
-    50% {
-        text-shadow: 0 0 20px rgba(255, 215, 0, 1);
-        background: linear-gradient(90deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.4));
-    }
-}
-
-.case-content ul li::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
-}
-
-.case-content ul li:hover::before {
-    transform: translateX(100%);
-}
-
-.case-content ul li:hover {
-    transform: translateX(5px) scale(1.02);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 215, 0, 0.2);
 }
 
 /* Стили для названий наборов */
@@ -1077,12 +987,6 @@ h1 {
 
 .phoenix-card .donation-features .cmd + span {
     background: linear-gradient(90deg, #FF4500, #FF8C00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.galaxy-card .donation-features .cmd + span {
-    background: linear-gradient(90deg, #ff00ff, #9900ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -1111,4 +1015,498 @@ h1 {
 .donation-features li:hover .cmd {
     transform: scale(1.05);
     transition: transform 0.3s ease;
+}
+
+/* Стили для PALADIN */
+.paladin-card {
+    background: linear-gradient(145deg, #004d4d, #006666);
+    border: 1px solid #00cccc;
+    position: relative;
+    overflow: hidden;
+}
+
+.paladin-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(0, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: paladinShine 4s infinite;
+}
+
+@keyframes paladinShine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(0, 255, 255, 0.1),
+            transparent
+        );
+    }
+    50% {
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(64, 224, 208, 0.2),
+            transparent
+        );
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(0, 255, 255, 0.1),
+            transparent
+        );
+    }
+}
+
+.paladin-card .donation-title {
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    animation: paladinText 2s infinite;
+}
+
+@keyframes paladinText {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(64, 224, 208, 0.8);
+    }
+}
+
+.paladin-card .donation-price {
+    background: rgba(0, 204, 204, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.paladin-card .donation-price .amount {
+    background: linear-gradient(45deg, #00ffff, #40e0d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+.paladin-card .donation-price .amount::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(45deg, #00ffff, #40e0d0);
+    filter: blur(10px);
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.paladin-card .cmd {
+    background: rgba(0, 255, 255, 0.1);
+    color: #00ffff;
+}
+
+.paladin-card .perk-value {
+    color: #00ffff;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+.paladin-card .buy-button {
+    background: linear-gradient(90deg, #40e0d0, #00ffff);
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.paladin-card .buy-button:hover {
+    background: linear-gradient(90deg, #00ffff, #40e0d0);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+}
+
+.paladin-card .donation-features .cmd + span {
+    background: linear-gradient(90deg, #40e0d0, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.paladin-card .donation-features li:hover .cmd {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+/* Стили для селектора валюты */
+.currency-selector {
+    position: relative;
+    width: 200px;
+    margin: 20px auto 0;
+    font-family: 'Minecraft', sans-serif;
+    z-index: 100;
+}
+
+.selected-currency {
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.2));
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.selected-currency:hover {
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.3));
+    transform: translateY(-2px);
+}
+
+.currency-icon {
+    font-size: 1.2em;
+    color: #FFD700;
+    margin-right: 10px;
+}
+
+.currency-name {
+    color: #FFD700;
+    flex-grow: 1;
+}
+
+.arrow {
+    color: #FFD700;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.currency-selector.active .arrow {
+    transform: rotate(180deg);
+}
+
+.currency-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(26, 26, 26, 0.95);
+    border-radius: 10px;
+    margin-top: 5px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.currency-selector.active .currency-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.currency-option {
+    padding: 12px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.currency-option:hover {
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.2));
+}
+
+/* Обновленные стили для модального окна */
+.modal-content {
+    background: linear-gradient(145deg, #1a1a2e, #2a2a4a);
+    max-width: 600px;
+    width: 90%;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.payment-amount {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.amount-display {
+    font-size: 2.5em;
+    color: #FFD700;
+    margin-top: 10px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.currency-label {
+    font-size: 0.7em;
+    opacity: 0.8;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.payment-method {
+    flex: 1;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.payment-method.active {
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.2));
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.payment-method:hover {
+    transform: translateY(-2px);
+}
+
+.method-icon {
+    font-size: 1.5em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.payment-details {
+    margin: 30px 0;
+}
+
+.card-details,
+.qr-details {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.card-details.active,
+.qr-details.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card-info {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.copy-card-button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, #4B0082, #9400D3);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button-icon {
+    font-size: 1.2em;
+}
+
+.confirm-payment-button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-payment-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.qr-code {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .payment-methods {
+        flex-direction: column;
+    }
+
+    .amount-display {
+        font-size: 2em;
+    }
+
+    .qr-code {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* Стили для GALAXY */
+.galaxy-card {
+    background: linear-gradient(145deg, #4B0082, #8B008B);
+    border: 1px solid #FF69B4;
+    position: relative;
+    overflow: hidden;
+}
+
+.galaxy-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 105, 180, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: galaxyShine 4s infinite;
+}
+
+@keyframes galaxyShine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 105, 180, 0.1),
+            transparent
+        );
+    }
+    50% {
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 0, 255, 0.2),
+            transparent
+        );
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 105, 180, 0.1),
+            transparent
+        );
+    }
+}
+
+.galaxy-card .donation-title {
+    color: #FF69B4;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    animation: galaxyText 2s infinite;
+}
+
+@keyframes galaxyText {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+    }
+}
+
+.galaxy-card .donation-price {
+    background: rgba(75, 0, 130, 0.2);
+    border: 1px solid rgba(255, 105, 180, 0.2);
+}
+
+.galaxy-card .donation-price .amount {
+    background: linear-gradient(45deg, #FF69B4, #FF00FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+.galaxy-card .donation-price .amount::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(45deg, #FF69B4, #FF00FF);
+    filter: blur(10px);
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.galaxy-card .cmd {
+    background: rgba(255, 105, 180, 0.1);
+    color: #FF69B4;
+}
+
+.galaxy-card .perk-value {
+    color: #FF69B4;
+    text-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
+}
+
+.galaxy-card .buy-button {
+    background: linear-gradient(90deg, #FF69B4, #FF00FF);
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.galaxy-card .buy-button:hover {
+    background: linear-gradient(90deg, #FF00FF, #FF69B4);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+}
+
+.galaxy-card .donation-features .cmd + span {
+    background: linear-gradient(90deg, #FF69B4, #FF00FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.galaxy-card .donation-features li:hover .cmd {
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+}
+
+.galaxy-card:hover {
+    box-shadow: 0 15px 30px rgba(255, 105, 180, 0.2);
 } 

@@ -1,40 +1,103 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Переключение валют
+    const currencySelector = document.querySelector('.currency-selector');
+    const selectedCurrency = document.querySelector('.selected-currency');
+    const currencyOptions = document.querySelectorAll('.currency-option');
+    const currencyLabel = document.querySelector('.currency-label');
+    
+    let currentCurrency = 'RUB';
+
+    selectedCurrency.addEventListener('click', () => {
+        currencySelector.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!currencySelector.contains(e.target)) {
+            currencySelector.classList.remove('active');
+        }
+    });
+
+    currencyOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const newCurrency = option.dataset.currency;
+            const currencyIcon = option.querySelector('.currency-icon').textContent;
+            const currencyName = option.querySelector('.currency-name').textContent;
+
+            selectedCurrency.querySelector('.currency-icon').textContent = currencyIcon;
+            selectedCurrency.querySelector('.currency-name').textContent = currencyName;
+            currencySelector.classList.remove('active');
+
+            currentCurrency = newCurrency;
+            updatePrices();
+        });
+    });
+
+    function updatePrices() {
+        // Обновляем цены для карточек привилегий
+        const donationCards = document.querySelectorAll('.donation-card');
+        donationCards.forEach(card => {
+            const rubPrice = card.querySelector('.rub-price');
+            const uahPrice = card.querySelector('.uah-price');
+            
+            if (rubPrice && uahPrice) {
+                if (currentCurrency === 'RUB') {
+                    uahPrice.classList.remove('active');
+                    setTimeout(() => {
+                        rubPrice.classList.add('active');
+                    }, 150);
+                } else {
+                    rubPrice.classList.remove('active');
+                    setTimeout(() => {
+                        uahPrice.classList.add('active');
+                    }, 150);
+                }
+            }
+        });
+
+        // Обновляем цены для кейсов
+        const caseCards = document.querySelectorAll('.case-card');
+        caseCards.forEach(card => {
+            const priceElement = card.querySelector('.case-price .amount');
+            if (priceElement) {
+                const rubPrice = card.dataset.price + '₽';
+                const uahPrice = (parseFloat(card.dataset.price) * 0.48).toFixed(1) + '₴';
+                priceElement.textContent = currentCurrency === 'RUB' ? rubPrice : uahPrice;
+            }
+        });
+    }
+
+    // Активируем рублевые цены сразу после определения функции
+    updatePrices();
+
     // Переключение вкладок
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
 
     function switchTab(targetTabId) {
-        // Находим активную вкладку
-        const activeContent = document.querySelector('.tab-content.active');
-        const targetContent = document.getElementById(targetTabId);
-
-        // Убираем активный класс со всех кнопок
+        // Удаляем класс active у всех кнопок
         tabButtons.forEach(btn => btn.classList.remove('active'));
         
-        // Активируем нужную кнопку
+        // Добавляем класс active нужной кнопке
         const targetButton = document.querySelector(`[data-tab="${targetTabId}"]`);
-        targetButton.classList.add('active');
+        if (targetButton) {
+            targetButton.classList.add('active');
+        }
 
-        // Если есть активная вкладка, анимируем её исчезновение
-        if (activeContent) {
-            activeContent.style.opacity = '0';
-            activeContent.style.transform = 'translateY(20px) scale(0.95)';
-            
+        // Скрываем все вкладки
+        tabContents.forEach(content => {
+            content.style.display = 'none';
+            content.classList.remove('active');
+        });
+
+        // Показываем нужную вкладку
+        const targetContent = document.getElementById(targetTabId);
+        if (targetContent) {
+            targetContent.style.display = 'block';
             setTimeout(() => {
-                activeContent.classList.remove('active');
-                // Показываем новую вкладку
                 targetContent.classList.add('active');
-                // Форсируем reflow
-                targetContent.offsetHeight;
-                // Анимируем появление
                 targetContent.style.opacity = '1';
                 targetContent.style.transform = 'translateY(0) scale(1)';
-            }, 300);
-        } else {
-            // Если активной вкладки нет, просто показываем новую
-            targetContent.classList.add('active');
-            targetContent.style.opacity = '1';
-            targetContent.style.transform = 'translateY(0) scale(1)';
+            }, 10);
         }
     }
 
@@ -45,60 +108,90 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Получаем элементы модального окна
+    // Модальное окно оплаты
     const modal = document.getElementById('paymentModal');
     const closeBtn = document.querySelector('.close');
     const privilegeTitle = document.getElementById('privilegeTitle');
     const paymentAmount = document.getElementById('paymentAmount');
+    const paymentMethods = document.querySelectorAll('.payment-method');
+    const cardDetails = document.querySelector('.card-details');
+    const qrDetails = document.querySelector('.qr-details');
 
-    // Функция для показа модального окна оплаты
     window.showPayment = (privilege, amount) => {
         privilegeTitle.textContent = privilege;
-        paymentAmount.textContent = amount;
-        modal.style.display = 'block';
         
-        // Добавляем анимацию появления
-        modal.style.opacity = '0';
+        // Находим цену в зависимости от типа карточки
+        let rubPrice, uahPrice;
+        
+        if (privilege === 'Кейс с донатом') {
+            const caseCard = document.querySelector('.case-card');
+            rubPrice = caseCard.querySelector('.case-price .amount').textContent;
+            uahPrice = amount + '₴';
+        } else {
+            const cards = document.querySelectorAll('.donation-card');
+            const card = Array.from(cards).find(card => 
+                card.querySelector('.donation-title').textContent === privilege
+            );
+            rubPrice = card.querySelector('.rub-price').textContent;
+            uahPrice = card.querySelector('.uah-price').textContent;
+        }
+        
+        paymentAmount.textContent = currentCurrency === 'RUB' ? rubPrice.replace('₽', '') : uahPrice.replace('₴', '');
+        currencyLabel.textContent = currentCurrency === 'RUB' ? '₽' : '₴';
+        
+        modal.style.display = 'block';
         setTimeout(() => {
             modal.style.opacity = '1';
+            modal.querySelector('.modal-content').style.transform = 'translateY(0)';
         }, 10);
     };
 
-    // Закрытие модального окна
+    paymentMethods.forEach(method => {
+        method.addEventListener('click', () => {
+            paymentMethods.forEach(m => m.classList.remove('active'));
+            method.classList.add('active');
+
+            if (method.dataset.method === 'card') {
+                cardDetails.classList.add('active');
+                qrDetails.classList.remove('active');
+            } else {
+                qrDetails.classList.add('active');
+                cardDetails.classList.remove('active');
+            }
+        });
+    });
+
     closeBtn.onclick = () => {
         modal.style.opacity = '0';
+        modal.querySelector('.modal-content').style.transform = 'translateY(-20px)';
         setTimeout(() => {
             modal.style.display = 'none';
         }, 300);
     };
 
-    // Закрытие при клике вне модального окна
     window.onclick = (event) => {
         if (event.target == modal) {
-            modal.style.opacity = '0';
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
+            closeBtn.onclick();
         }
     };
 
-    // Копирование номера карты
     window.copyCard = () => {
         const cardNumber = document.querySelector('.card-number').textContent;
         navigator.clipboard.writeText(cardNumber).then(() => {
-            alert('Номер карты скопирован!');
+            const copyButton = document.querySelector('.copy-card-button');
+            const originalText = copyButton.innerHTML;
+            copyButton.innerHTML = '<span class="button-icon">✓</span>Скопировано!';
+            setTimeout(() => {
+                copyButton.innerHTML = originalText;
+            }, 2000);
         });
     };
 
-    // Подтверждение оплаты
     window.confirmPayment = () => {
         const nickname = prompt('Введите ваш никнейм в игре:');
         if (nickname) {
             alert(`Спасибо за оплату! Мы проверим платеж и выдадим привилегию на никнейм ${nickname} в течение 5 минут.`);
-            modal.style.display = 'none';
-            
-            // Здесь можно добавить отправку данных на сервер или в Discord/Telegram бот
-            // Например, отправить webhook в Discord с информацией о платеже
+            closeBtn.onclick();
         }
     };
 
@@ -113,4 +206,10 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = 'translateY(0) scale(1)';
         });
     });
+
+    // Добавляем вспомогательную функцию для поиска по содержимому
+    jQuery.expr[':'].contains = function(a, i, m) {
+        return jQuery(a).text().toUpperCase()
+            .indexOf(m[3].toUpperCase()) >= 0;
+    };
 }); 
