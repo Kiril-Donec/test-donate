@@ -44,6 +44,8 @@ h1 {
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
 }
 
 .donation-card {
@@ -1876,4 +1878,69 @@ h1 {
 .feature-section.perks li:nth-child(3) { --li-index: 3; }
 .feature-section.perks li:nth-child(4) { --li-index: 4; }
 .feature-section.perks li:nth-child(5) { --li-index: 5; }
-.feature-section.perks li:nth-child(6) { --li-index: 6; } 
+.feature-section.perks li:nth-child(6) { --li-index: 6; }
+
+.donation-card:not(.star-card) .uah-price {
+    text-align: center;
+    margin-top: -40px;
+}
+
+.donation-card.star-card .uah-price {
+    margin-top: 0; /* Убираем отступ для стар доната */
+}
+
+.login-button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#openLoginForm {
+    padding: 10px 20px;
+    background: #FFD700;
+    border: none;
+    border-radius: 5px;
+    color: #1a1a1a;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#openLoginForm:hover {
+    background: #FFC000;
+}
+
+.login-container {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.login-container h2 {
+    margin-bottom: 15px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background: #FFD700;
+    border: none;
+    border-radius: 5px;
+    color: #1a1a1a;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-container button:hover {
+    background: #FFC000;
+} 

@@ -3,309 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Донаты - MineCraft Сервер</title>
+    <title>HrustMine - Главная страница</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>HrustMine Донат</h1>
-            <p class="subtitle">Выберите категорию</p>
-            <div class="currency-selector">
-                <div class="selected-currency">
-                    <span class="currency-icon">₽</span>
-                    <span class="currency-name">Рубли</span>
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="currency-options">
-                    <div class="currency-option" data-currency="RUB">
-                        <span class="currency-icon">₽</span>
-                        <span class="currency-name">Рубли</span>
-                    </div>
-                    <div class="currency-option" data-currency="UAH">
-                        <span class="currency-icon">₴</span>
-                        <span class="currency-name">Гривны</span>
-                    </div>
-                </div>
-            </div>
+            <h1>Добро пожаловать на HrustMine!</h1>
+            <p class="subtitle">Ваш любимый Minecraft сервер</p>
         </header>
-
         <nav class="tabs">
-            <button class="tab-button active" data-tab="privileges">
-                <span class="tab-icon">⭐</span>
-                Привилегии
+            <button class="tab-button active" data-tab="home">
+                <span class="tab-icon">🏠</span>
+                Главная
             </button>
-            <button class="tab-button" data-tab="cases">
+            <button class="tab-button" data-tab="donate">
                 <span class="tab-icon">🎁</span>
-                Донат кейсы
+                Донат
             </button>
         </nav>
-        
-        <div class="tab-content active" id="privileges">
-            <div class="donations-container">
-                <div class="donation-card" data-price="39">
-                    <div class="donation-title">STAR</div>
-                    <div class="donation-price">
-                        <div class="amount rub-price">39₽</div>
-                        <div class="amount uah-price">18.5₴</div>
+        <div class="tab-content active" id="home">
+            <p>Здесь вы можете найти информацию о нашем сервере, правилах и событиях.</p>
                     </div>
-                    <div class="donation-features">
-                        <div class="feature-section commands">
-                            <h3>Команды:</h3>
-                            <ul>
-                                <li><span class="cmd">/hat</span> - Надеть предмет на голову</li>
-                                <li><span class="cmd">/craft</span> - Открыть верстак</li>
-                                <li><span class="cmd">/kits</span> - Набор <span>STAR ⭐</span></li>
-                            </ul>
-                        </div>
-                        <div class="feature-section perks">
-                            <h3>Доп. возможности:</h3>
-                            <ul>
-                                <li><span class="perk-value">3</span> региона</li>
-                                <li><span class="perk-value">6</span> слотов на аукционе</li>
-                                <li><span class="perk-value">2</span> точки дома</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="buy-button" onclick="showPayment('STAR', 18.5)">Купить</button>
-                </div>
-
-                <div class="donation-card cosmos-card" data-price="89">
-                    <div class="donation-title">COSMOS</div>
-                    <div class="donation-price">
-                        <div class="amount rub-price">89₽</div>
-                        <div class="amount uah-price">42.5₴</div>
-                    </div>
-                    <div class="donation-features">
-                        <div class="feature-section commands">
-                            <h3>Команды:</h3>
-                            <ul>
-                                <li><span class="cmd">/ec</span> - Открыть эндер-сундук</li>
-                                <li><span class="cmd">/iteminfo</span> - Узнать айди предмета</li>
-                                <li><span class="cmd">/workbench</span> - Открыть верстак</li>
-                                <li><span class="cmd">/loom</span> - Виртуальный ткацкий станок</li>
-                                <li><span class="cmd">/kits</span> - Набор <span>COSMOS</span></li>
-                            </ul>
-                        </div>
-                        <div class="feature-section perks">
-                            <h3>Доп. возможности:</h3>
-                            <ul>
-                                <li><span class="perk-value">3</span> региона</li>
-                                <li><span class="perk-value">7</span> слотов на аукционе</li>
-                                <li><span class="perk-value">2</span> точки дома</li>
-                                <li class="limited-offer">⚡ Специальное предложение</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="buy-button" onclick="showPayment('COSMOS', 42.5)">Купить</button>
-                </div>
-
-                <div class="donation-card phoenix-card" data-price="219">
-                    <div class="donation-title">PHOENIX</div>
-                    <div class="donation-price">
-                        <div class="amount rub-price">219₽</div>
-                        <div class="amount uah-price">105₴</div>
-                    </div>
-                    <div class="donation-features">
-                        <div class="feature-section commands">
-                            <h3>Команды:</h3>
-                            <ul>
-                                <li><span class="cmd">/ext</span> - Потушить себя</li>
-                                <li><span class="cmd">/ignore</span> - Игнорировать игрока</li>
-                                <li><span class="cmd">/clear</span> - Очистить себе инвентарь</li>
-                                <li><span class="cmd">/cartographytable</span> - Открыть стол картографа</li>
-                                <li><span class="cmd">/kits</span> - Набор <span>PHOENIX</span></li>
-                            </ul>
-                        </div>
-                        <div class="feature-section perks">
-                            <h3>Доп. возможности:</h3>
-                            <ul>
-                                <li><span class="perk-value">3</span> региона</li>
-                                <li><span class="perk-value">8</span> слотов на аукционе</li>
-                                <li><span class="perk-value">3</span> точек дома</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="buy-button" onclick="showPayment('PHOENIX', 105)">Купить</button>
-                </div>
-
-                <div class="donation-card galaxy-card" data-price="459">
-                    <div class="donation-title">GALAXY</div>
-                    <div class="donation-price">
-                        <div class="amount rub-price">459₽</div>
-                        <div class="amount uah-price">220₴</div>
-                    </div>
-                    <div class="donation-features">
-                        <div class="feature-section commands">
-                            <h3>Команды:</h3>
-                            <ul>
-                                <li><span class="cmd">/anvil</span> - Открыть наковальню</li>
-                                <li><span class="cmd">/ptime</span> - Установить личное время суток</li>
-                                <li><span class="cmd">/repair</span> - Починить один предмет</li>
-                                <li><span class="cmd">/kits</span> - Набор <span>GALAXY</span></li>
-                            </ul>
-                        </div>
-                        <div class="feature-section perks">
-                            <h3>Доп. возможности:</h3>
-                            <ul>
-                                <li><span class="perk-value">4</span> региона</li>
-                                <li><span class="perk-value">9</span> слотов на аукционе</li>
-                                <li><span class="perk-value">4</span> точек дома</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="buy-button" onclick="showPayment('GALAXY', 220)">Купить</button>
-                </div>
-
-                <div class="donation-card paladin-card" data-price="929">
-                    <div class="donation-title">PALADIN</div>
-                    <div class="donation-price">
-                        <div class="amount rub-price">929₽</div>
-                        <div class="amount uah-price">445₴</div>
-                    </div>
-                    <div class="donation-features">
-                        <div class="feature-section commands">
-                            <h3>Команды:</h3>
-                            <ul>
-                                <li><span class="cmd">/feed</span> - Утолить голод</li>
-                                <li><span class="cmd">/head</span> - Получить голову игрока</li>
-                                <li><span class="cmd">/dura</span> - Узнать айди предмета</li>
-                                <li><span class="cmd">/stonecutter</span> - Виртуальный камнерез</li>
-                                <li><span class="cmd">/kits</span> - Набор <span>PALADIN</span></li>
-                            </ul>
-                        </div>
-                        <div class="feature-section perks">
-                            <h3>Доп. возможности:</h3>
-                            <ul>
-                                <li><span class="perk-value">5</span> регионов</li>
-                                <li><span class="perk-value">10</span> слотов на аукционе</li>
-                                <li><span class="perk-value">5</span> точек дома</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="buy-button" onclick="showPayment('PALADIN', 445)">Купить</button>
-                </div>
-
-                <div class="donation-card hrust-card" data-price="1239">
-                    <div class="donation-title">HRUST</div>
-                    <div class="donation-price">
-                        <div class="amount rub-price">1239₽</div>
-                        <div class="amount uah-price">595₴</div>
-                    </div>
-                    <div class="donation-features">
-                        <div class="feature-section commands">
-                            <h3>Команды:</h3>
-                            <ul>
-                                <li><span class="cmd">/broadcast</span> - Возможность писать объявления</li>
-                                <li><span class="cmd">/book</span> - Возможность редактирования книг</li>
-                                <li><span class="cmd">/near</span> - Найти игрока (100 метров)</li>
-                                <li><span class="cmd">/kits</span> - Набор <span>HRUST</span></li>
-                            </ul>
-                        </div>
-                        <div class="feature-section perks">
-                            <h3>Доп. возможности:</h3>
-                            <ul>
-                                <li>Анимированный префикс</li>
-                                <li>Прямая связь с Владельцем Сервера</li>
-                                <li>Вход на заполненый сервер</li>
-                                <li><span class="perk-value">7</span> регионов</li>
-                                <li><span class="perk-value">12</span> слотов на аукционе</li>
-                                <li><span class="perk-value">6</span> точек дома</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="buy-button" onclick="showPayment('HRUST', 595)">Купить</button>
-                </div>
-            </div>
+        <div class="tab-content" id="donate">
+            <p>Перейдите на страницу <a href="donate.html">доната</a>, чтобы поддержать сервер!</p>
         </div>
-
-        <div class="tab-content" id="cases">
-            <div class="cases-container">
-                <div class="case-card" data-price="34">
-                    <div class="case-title">Кейс с донатом</div>
-                    <div class="case-image">
-                        <img src="./donate_case.JPG" alt="Кейс с донатом">
-                    </div>
-                    <div class="case-price">
-                        <div class="amount rub-price active">34₽</div>
-                        <div class="amount uah-price">16.5₴</div>
-                    </div>
-                    <div class="case-content">
-                        <h3>Содержимое кейса:</h3>
-                        <ul>
-                            <li><span class="chance">50%</span><span class="privilege">[<span class="name">STAR</span>]</span></li>
-                            <li><span class="chance">30%</span><span class="privilege">[<span class="name">COSMOS</span>]</span></li>
-                            <li><span class="chance">12%</span><span class="privilege">[<span class="name">PHOENIX</span>]</span></li>
-                            <li><span class="chance">6%</span><span class="privilege">[<span class="name">GALAXY</span>]</span></li>
-                            <li><span class="chance">1.9%</span><span class="privilege">[<span class="name">PALADIN</span>]</span></li>
-                            <li><span class="chance">0.05%</span><span class="privilege">[<span class="name">JACKPOT</span>]</span></li>
-                        </ul>
-                        <div class="case-description">
-                            <p>Отличный вариант, если у вас немного денег, но дорогую привилегию всё же хочется. Здесь решает только ваша удача!</p>
-                        </div>
-                    </div>
-                    <button class="buy-button" onclick="showPayment('Кейс с донатом', 16.5)">Купить</button>
-                </div>
-            </div>
+        <div class="login-container" style="display: none;">
+            <h2>Вход в аккаунт</h2>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Ник" required>
+                <input type="password" id="password" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+            </form>
+            <p id="loginMessage"></p>
+        </div>
+        <div class="login-button-container">
+            <a href="login.html" id="openLoginForm">Вход</a>
         </div>
     </div>
-
-    <!-- Модальное окно оплаты -->
-    <div id="paymentModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Оплата привилегии <span id="privilegeTitle"></span></h2>
-            <div class="payment-info">
-                <div class="payment-amount">
-                    <p>Сумма к оплате:</p>
-                    <div class="amount-display">
-                        <span id="paymentAmount"></span>
-                        <span class="currency-label">₴</span>
-                    </div>
-                </div>
-                <div class="payment-methods">
-                    <div class="payment-method active" data-method="card">
-                        <span class="method-icon">💳</span>
-                        <span class="method-name">Банковская карта</span>
-                    </div>
-                    <div class="payment-method" data-method="qr">
-                        <span class="method-icon">📱</span>
-                        <span class="method-name">QR-код</span>
-                    </div>
-                </div>
-                <div class="payment-steps">
-                    <h3>Как оплатить:</h3>
-                    <ol>
-                        <li>Выберите способ оплаты</li>
-                        <li>При оплате картой: <span class="card-number">XXXX XXXX XXXX XXXX</span></li>
-                        <li>В комментарии укажите свой никнейм</li>
-                        <li>После оплаты нажмите кнопку "Я оплатил"</li>
-                    </ol>
-                </div>
-                <div class="payment-details">
-                    <div class="card-details active">
-                        <div class="card-info">
-                            <button class="copy-card-button" onclick="copyCard()">
-                                <span class="button-icon">📋</span>
-                                Скопировать номер карты
-                            </button>
-                        </div>
-                    </div>
-                    <div class="qr-details">
-                        <div class="qr-code">
-                            <div class="qr-placeholder">QR-код для оплаты</div>
-                        </div>
-                    </div>
-                </div>
-                <button class="confirm-payment-button" onclick="confirmPayment()">
-                    <span class="button-icon">✓</span>
-                    Я оплатил
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 

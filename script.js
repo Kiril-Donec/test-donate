@@ -212,4 +212,39 @@ document.addEventListener('DOMContentLoaded', () => {
         return jQuery(a).text().toUpperCase()
             .indexOf(m[3].toUpperCase()) >= 0;
     };
+
+    // Обработка формы входа
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Предотвращаем перезагрузку страницы
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Отправляем запрос на сервер для проверки учетных данных
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+        const loginMessage = document.getElementById('loginMessage');
+
+        if (data.success) {
+            loginMessage.textContent = 'Успешный вход!';
+            // Здесь можно добавить логику для обновления интерфейса
+        } else {
+            loginMessage.textContent = 'Неверный ник или пароль.';
+        }
+    });
+
+    // Обработка кнопки входа
+    const openLoginFormButton = document.getElementById('openLoginForm');
+    const loginContainer = document.querySelector('.login-container');
+
+    openLoginFormButton.addEventListener('click', () => {
+        loginContainer.style.display = loginContainer.style.display === 'block' ? 'none' : 'block';
+    });
 }); 
