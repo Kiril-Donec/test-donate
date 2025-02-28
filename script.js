@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const qrDetails = document.querySelector('.qr-details');
 
     window.showPayment = (privilege, amount) => {
+        console.log('Вызвана функция showPayment с привилегией:', privilege, 'и суммой:', amount); // Отладочное сообщение
         privilegeTitle.textContent = privilege;
         
         // Находим цену в зависимости от типа карточки

@@ -17,16 +17,16 @@
                 <span class="tab-icon">🏠</span>
                 Главная
             </button>
-            <button class="tab-button" data-tab="donate">
+            <button class="tab-button" data-tab="donate" onclick="window.location.href='donate.html';">
                 <span class="tab-icon">🎁</span>
                 Донат
             </button>
         </nav>
         <div class="tab-content active" id="home">
-            <p>Здесь вы можете найти информацию о нашем сервере, правилах и событиях.</p>
-                    </div>
+            <p>Добро пожаловать на HrustMine!</p>
+        </div>
         <div class="tab-content" id="donate">
-            <p>Перейдите на страницу <a href="donate.html">доната</a>, чтобы поддержать сервер!</p>
+            <p>Поддержите наш сервер, сделав донат! Ваш вклад поможет нам улучшить игру и добавить новые функции.</p>
         </div>
         <div class="login-container" style="display: none;">
             <h2>Вход в аккаунт</h2>
@@ -40,6 +40,11 @@
         <div class="login-button-container">
             <a href="login.html" id="openLoginForm">Вход</a>
         </div>
+        <nav>
+            <ul>
+                <li><a href="donate.html" class="donate-button">Донаты</a></li>
+            </ul>
+        </nav>
     </div>
     <script src="script.js"></script>
 </body>
