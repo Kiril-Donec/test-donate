@@ -1911,36 +1911,93 @@ h1 {
 }
 
 .login-container {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(200, 200, 200, 0.9));
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.login-container:hover {
+    transform: scale(1.02);
 }
 
 .login-container h2 {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 2em;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 .login-container input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 12px;
+    margin: 12px 0;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.login-container input:focus {
+    border-color: #45a049;
+    outline: none;
 }
 
 .login-container button {
     width: 100%;
-    padding: 10px;
-    background: #FFD700;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    border-radius: 5px;
-    color: #1a1a1a;
-    font-size: 1em;
+    border-radius: 8px;
+    font-size: 18px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .login-container button:hover {
-    background: #FFC000;
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.login-container p {
+    margin-top: 15px;
+    color: #777;
+    font-size: 0.9em;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.input-field:focus {
+    border-color: #45a049;
+    outline: none;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
 } 

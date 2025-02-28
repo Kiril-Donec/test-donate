@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .amount {
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         .amount.fade-out {
             opacity: 0;
@@ -16,6 +16,24 @@
         .amount.fade-in {
             opacity: 1;
             transform: translateY(0);
+        }
+        .exit-button {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            padding: 10px 15px;
+            background-color: #FFD700;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+        .exit-button:hover {
+            background-color: #FFC000;
         }
     </style>
 </head>
@@ -106,7 +124,7 @@
                                 <li><span class="perk-value">3</span> региона</li>
                                 <li><span class="perk-value">7</span> слотов на аукционе</li>
                                 <li><span class="perk-value">2</span> точки дома</li>
-                                <li class="limited-offer">⚡ Специальное предложение</li>
+                                <!--<li class="limited-offer">⚡ Специальное предложение</li>-->
                             </ul>
                         </div>
                     </div>
@@ -316,6 +334,8 @@
             </div>
         </div>
     </div>
+
+    <button class="exit-button" onclick="window.location.href='index.html'">На главную</button>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js"></script>
